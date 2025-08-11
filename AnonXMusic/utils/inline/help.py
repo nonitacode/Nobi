@@ -15,18 +15,29 @@ def help_pannel(_, START: Union[bool, int] = None):
     ]
     mark = second if START else first
     upl = InlineKeyboardMarkup(
-        [
-            [
-                InlineKeyboardButton(
-                    text=_["H_B_1"],
-                    callback_data="help_callback hb1",
-                ),
-                InlineKeyboardButton(
-                    text=_["H_B_2"],
-                    callback_data="help_callback hb2",
-                ),
+        [[
+        InlineKeyboardButton(text="•💠 𝐒ᴜᴘᴘᴏʀᴛ 𝐂ʜᴀᴛ 💬•", url="https://t.me/KingXMusic"),
+        InlineKeyboardButton(text="•📡 𝐒ᴜᴘᴘᴏʀᴛ 🌐•", url="https://t.me/KingXUpdates"),
+    ],
+    [
+        InlineKeyboardButton(text="•👑 𝐎ᴡɴᴇʀ ⚜️•", url="https://t.me/KingXOwner"),
+    ],
+    [
+        InlineKeyboardButton(text="•🤖 𝐀ʟʟ 𝐁ᴏᴛꜱ 🛠️•", url="https://t.me/KingXBots"),
+        InlineKeyboardButton(text="•🌀 𝐂ʟᴏɴᴇ 🔮•", url="https://t.me/KingXClone"),
+    ],
+
+            #[
+                #InlineKeyboardButton(
+                    #text=_["H_B_1"],
+                    #callback_data="help_callback hb1",
+                #),
+                #InlineKeyboardButton(
+                    #text=_["H_B_2"],
+                    #callback_data="help_callback hb2",
+                #),
                 #InlineKeyboardButton(text=_["H_B_3"],callback_data="help_callback hb3",),
-            ],
+            #],
             #[InlineKeyboardButton(
                     #text=_["H_B_4"],
                     #callback_data="help_callback hb4",
