@@ -68,10 +68,10 @@ def stream_markup_timer(_, chat_id, played, dur):
     ],
         [
             
-            InlineKeyboardButton(text="❚❚ ", callback_data=f"ADMIN Pause|{chat_id}"),
+            InlineKeyboardButton(text=" 𓊕  ", callback_data=f"ADMIN Pause|{chat_id}"),
             InlineKeyboardButton(text=_["CLOSE_BUTTON"], callback_data="close"), 
             InlineKeyboardButton(
-                text="|►►", callback_data=f"ADMIN Skip|{chat_id}"
+                text="▶", callback_data=f"ADMIN Skip|{chat_id}"
             ),
         ],
         
