@@ -68,8 +68,8 @@ async def get_thumb(videoid):
                     await f.write(await resp.read())
                     await f.close()
 
-        
-        colors = ["#FFB031"]
+        # Border ka color (Cyan Neon)
+        colors = ["#00FFFF"]
         border = colors[0]
         youtube = Image.open(f"cache/thumb{videoid}.png")
         image1 = changeImageSize(1280, 720, youtube)
@@ -82,46 +82,51 @@ async def get_thumb(videoid):
         draw = ImageDraw.Draw(background)
         arial = ImageFont.truetype("AnonXMusic/assets/font2.ttf", 30)
         font = ImageFont.truetype("AnonXMusic/assets/font.ttf", 30)
-        font4=ImageFont.truetype("AnonXMusic/assets/font4.ttf",30)
-        draw.text((550, 8), unidecode(app.name), fill="#FFB031", font=font4, width=50,)
-        
+        font4 = ImageFont.truetype("AnonXMusic/assets/font4.ttf", 30)
+
+        # App name (Gold)
+        draw.text((550, 8), unidecode(app.name), fill="#FFD700", font=font4, width=50,)
+
+        # Channel name + views (White)
         draw.text(
             (55, 560),
             f"{channel} | {views[:23]}",
             (255, 255, 255),
             font=arial,
         )
+
+        # Video title (Hot Pink)
         draw.text(
             (57, 600),
             clear(title),
-            fill="#FFB031",
-               #(255, 255, 255),
+            fill="#FF69B4",
             font=font,
         )
+
+        # Progress bar line (Red)
         draw.line(
             [(55, 660), (1220, 660)],
             fill="#FF3131",
             width=8,
             joint="curve",
         )
+
+        # Progress knob (Gold)
         draw.ellipse(
             [(918, 648), (942, 672)],
-            outline="black",
-            fill="black",
+            outline="#FFD700",
+            fill="#FFD700",
             width=15,
         )
-        # draw.text(
-        #     (36, 685),
-        #     "00:00",
-        #     (255, 255, 255),
-        #     font=arial,
-        # )
+
+        # Player icons (Neon Green)
         draw.text(
             (430, 670),
             f"↻        ◁      II       ▷        ↺",
-            fill="#FFB031",
+            fill="#00FF00",
             font=font4,
         )
+
         try:
             os.remove(f"cache/thumb{videoid}.png")
         except:
