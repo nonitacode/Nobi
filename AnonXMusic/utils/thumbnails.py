@@ -1,9 +1,13 @@
 import os
 import re
+import random
 
 import aiofiles
 import aiohttp
-from PIL import Image, ImageDraw, ImageEnhance, ImageFilter, ImageFont
+
+from PIL import Image, ImageDraw, ImageEnhance
+from PIL import ImageFilter, ImageFont, ImageOps
+
 from unidecode import unidecode
 from youtubesearchpython.__future__ import VideosSearch
 
@@ -64,16 +68,23 @@ async def get_thumb(videoid):
                     await f.write(await resp.read())
                     await f.close()
 
+
+        colors = ["#FFB031"]
+        border = colors[0]
         youtube = Image.open(f"cache/thumb{videoid}.png")
         image1 = changeImageSize(1280, 720, youtube)
-        image2 = image1.convert("RGBA")
-        background = image2.filter(filter=ImageFilter.BoxBlur(10))
-        enhancer = ImageEnhance.Brightness(background)
-        background = enhancer.enhance(0.5)
+        bg_bright = ImageEnhance.Brightness(image1)
+        bg_logo = bg_bright.enhance(1.1)
+        bg_contra = ImageEnhance.Contrast(bg_logo)
+        bg_logo = bg_contra.enhance(1.1)
+        logox = ImageOps.expand(bg_logo, border=12, fill=f"{border}")
+        background = changeImageSize(1280, 720, logox)
         draw = ImageDraw.Draw(background)
         arial = ImageFont.truetype("AnonXMusic/assets/font2.ttf", 30)
         font = ImageFont.truetype("AnonXMusic/assets/font.ttf", 30)
-        draw.text((1110, 8), unidecode(app.name), fill="white", font=arial)
+        font4=ImageFont.truetype("AnonXMusic/assets/font4.ttf",30)
+        draw.text((550, 8), unidecode(app.name), fill="#FFB031", font=font4, width=50,)
+
         draw.text(
             (55, 560),
             f"{channel} | {views[:23]}",
@@ -83,32 +94,33 @@ async def get_thumb(videoid):
         draw.text(
             (57, 600),
             clear(title),
-            (255, 255, 255),
+            fill="#FFB031",
+               #(255, 255, 255),
             font=font,
         )
         draw.line(
             [(55, 660), (1220, 660)],
-            fill="white",
-            width=5,
+            fill="#FF3131",
+            width=8,
             joint="curve",
         )
         draw.ellipse(
             [(918, 648), (942, 672)],
-            outline="white",
-            fill="white",
+            outline="black",
+            fill="black",
             width=15,
         )
+        # draw.text(
+        #     (36, 685),
+        #     "00:00",
+        #     (255, 255, 255),
+        #     font=arial,
+        # )
         draw.text(
-            (36, 685),
-            "00:00",
-            (255, 255, 255),
-            font=arial,
-        )
-        draw.text(
-            (1185, 685),
-            f"{duration[:23]}",
-            (255, 255, 255),
-            font=arial,
+            (430, 670),
+            f"↻        ◁      II       ▷        ↺",
+            fill="#FFB031",
+            font=font4,
         )
         try:
             os.remove(f"cache/thumb{videoid}.png")
